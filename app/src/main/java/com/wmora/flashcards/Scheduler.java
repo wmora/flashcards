@@ -38,10 +38,11 @@ public class Scheduler {
     }
 
     public void setUpAlarms() {
-        for (Calendar calendar : calendars) {
+        for (int i = 0; i < calendars.size(); i++) {
+            Calendar calendar = calendars.get(i);
             AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(context, NotificationService.class);
-            PendingIntent alarmIntent = PendingIntent.getService(context, REQUEST_CODE, intent,
+            PendingIntent alarmIntent = PendingIntent.getService(context, REQUEST_CODE + i, intent,
                     PendingIntent.FLAG_UPDATE_CURRENT);
             alarmManager.setInexactRepeating(AlarmManager.RTC, calendar.getTimeInMillis(), DAY_IN_MILLIS,
                     alarmIntent);
