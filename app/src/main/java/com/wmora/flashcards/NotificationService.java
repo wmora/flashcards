@@ -1,9 +1,9 @@
 package com.wmora.flashcards;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 
 public class NotificationService extends IntentService {
 
@@ -31,10 +31,13 @@ public class NotificationService extends IntentService {
             return;
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
-        builder.setContentText(flashcard.getPrompt());
+        Notification.Builder builder = new Notification.Builder(this)
+                .setContentTitle(flashcard.getPrompt())
+                .setContentText(getString(R.string.notification_content_text))
+                .setSmallIcon(R.mipmap.ic_launcher);
 
-        NotificationManagerCompat.from(this).notify(0, builder.build());
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        manager.notify(flashcard.hashCode(), builder.build());
     }
 
 }

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Flashcards</string>
+    <string name="notification_content_text">Stay focused!</string>
 </resources>
